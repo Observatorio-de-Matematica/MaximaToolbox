@@ -118,6 +118,13 @@ sol1: solve(ode2(eq1,y,x),%c);
 sol2: solve(ode2(eq2,y,x),%c);
 ξ:rhs(first(sol1));
 η:rhs(first(sol2));
+jac: jacobian([ξ, η], [x, y])$
+det_jac: 'Determinant = determinant(jac);
+check: is(det_jac = 0);
+if check = false then (
+    print("Determinant ≠ 0,You can proceed!"))
+else(
+    print("Please choose another value of η"));
 ξ_x:diff(ξ,x)$ξ_y:diff(ξ,y)$ξ_xx:diff(ξ,x,2)$ξ_yy:diff(ξ,y,2)$ξ_xy:diff(ξx,y)$
 η_x:diff(η,x)$η_y:diff(η,y)$η_xx:diff(η,x,2)$η_yy:diff(η,y,2)$η_xy:diff(ηx,y)$
 u_x:u_ξ*ξ_x+u_η*η_x$
@@ -160,6 +167,22 @@ eq1: 'diff(y,x) = (B+sqrt(D))/(2*A);
 sol1: solve(ode2(eq1,y,x),%c);
 ξ:rhs(first(sol1));
 η:y;
+
+/* Compute the Jacobian */
+jac: jacobian([ξ, η], [x, y]);
+det_jac: determinant(jac);
+check: is(det_jac = 0);
+
+/* Conditional: If the Jacobian determinant is zero, handle transformations */
+if check = false then (
+  print("Determinant ≠ 0,You can proceed!")
+)
+else (
+    /* If determinant is zero, print message */
+    print("Please choose another value of η")
+);
+
+
 ξ_x:diff(ξ,x)$ξ_y:diff(ξ,y)$ξ_xx:diff(ξ,x,2)$ξ_yy:diff(ξ,y,2)$ξ_xy:diff(ξx,y)$
 η_x:diff(η,x)$η_y:diff(η,y)$η_xx:diff(η,x,2)$η_yy:diff(η,y,2)$η_xy:diff(ηx,y)$
 u_x:u_ξ*ξ_x+u_η*η_x$
