@@ -1,0 +1,219 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Prcatical 1.b
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: section start ]
+Hyperbolic 
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Q1. y^2*u_xx-x^2*u_yy=0;
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+y^2*u_xx-x^2*u_yy = 0;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+'A = A:y^2;
+'B = B:0;
+'C = C:-x^2;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+'D = D:B^2-4*A*C;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+assume(y>0);
+assume(x>0);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eq1: 'diff(y,x) = (B+sqrt(D))/(2*A);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eq2: 'diff(y,x) = (B-sqrt(D))/(2*A);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+sol1: solve(ode2(eq1,y,x),%c);
+sol2: solve(ode2(eq2,y,x),%c);
+
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ξ:rhs(first(sol1));
+η:rhs(first(sol2));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ξ_x:diff(ξ,x)$ξ_y:diff(ξ,y)$ξ_xx:diff(ξ,x,2)$ξ_yy:diff(ξ,y,2)$ξ_xy:diff(ξx,y)$
+η_x:diff(η,x)$η_y:diff(η,y)$η_xx:diff(η,x,2)$η_yy:diff(η,y,2)$η_xy:diff(ηx,y)$
+
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+u_x:u_ξ*ξ_x+u_η*η_x$
+u_y:u_ξ*ξ_y+u_η*η_y$
+u_xx:u_ξξ*(ξ_x)^2+2*u_ξη*ξ_x*η_x+u_ηη*(η_x)^2+u_ξ*ξ_xx+u_η*η_xx$
+u_yy:u_ξξ*(ξ_y)^2+2*u_ξη*ξ_y*η_y+u_ηη*(η_y)^2+u_ξ*ξ_yy+u_η*η_yy$
+u_xy:u_ξξ*ξ_x*ξ_y+u_ξη*(ξ_x*η_y+ξ_y*η_x)+u_ηη*η_x*η_y+u_ξ*ξ_xy+u_η*η_xy$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eq3:A*u_xx+C*u_yy=0;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ratsimp(%);
+solve(%,u_ξη);
+
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Q2. 4*u_xx+5*u_xy+u_yy+u_x+u_y=2
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+4*u_xx+5*u_xy+u_yy+u_x+u_y=2;
+'A = A:4;
+'B = B:5;
+'C = C:1;
+'D = D:B^2-4*A*C;
+assume(y>0);
+assume(x>0);
+eq1: 'diff(y,x) = (B+sqrt(D))/(2*A);
+eq2: 'diff(y,x) = (B-sqrt(D))/(2*A);
+sol1: solve(ode2(eq1,y,x),%c);
+sol2: solve(ode2(eq2,y,x),%c);
+ξ:rhs(first(sol1));
+η:rhs(first(sol2));
+ξ_x:diff(ξ,x)$ξ_y:diff(ξ,y)$ξ_xx:diff(ξ,x,2)$ξ_yy:diff(ξ,y,2)$ξ_xy:diff(ξx,y)$
+η_x:diff(η,x)$η_y:diff(η,y)$η_xx:diff(η,x,2)$η_yy:diff(η,y,2)$η_xy:diff(ηx,y)$
+u_x:u_ξ*ξ_x+u_η*η_x$
+u_y:u_ξ*ξ_y+u_η*η_y$
+u_xx:u_ξξ*(ξ_x)^2+2*u_ξη*ξ_x*η_x+u_ηη*(η_x)^2+u_ξ*ξ_xx+u_η*η_xx$
+u_yy:u_ξξ*(ξ_y)^2+2*u_ξη*ξ_y*η_y+u_ηη*(η_y)^2+u_ξ*ξ_yy+u_η*η_yy$
+u_xy:u_ξξ*ξ_x*ξ_y+u_ξη*(ξ_x*η_y+ξ_y*η_x)+u_ηη*η_x*η_y+u_ξ*ξ_xy+u_η*η_xy$
+eq3:A*u_xx+B*u_xy+C*u_yy+u_x+u_y=2;
+ratsimp(%);
+solve(%,u_ξη);
+
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Parabolic
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Q1. u_xx-2*u_xy+u_yy=0
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+u_xx-2*u_xy+u_yy;
+'A = A:1;
+'B = B:-2;
+'C = C:1;
+'D = D:B^2-4*A*C;
+assume(y>0);
+assume(x>0);
+eq1: 'diff(y,x) = (B+sqrt(D))/(2*A);
+sol1: solve(ode2(eq1,y,x),%c);
+ξ:rhs(first(sol1));
+η:y;
+ξ_x:diff(ξ,x)$ξ_y:diff(ξ,y)$ξ_xx:diff(ξ,x,2)$ξ_yy:diff(ξ,y,2)$ξ_xy:diff(ξx,y)$
+η_x:diff(η,x)$η_y:diff(η,y)$η_xx:diff(η,x,2)$η_yy:diff(η,y,2)$η_xy:diff(ηx,y)$
+u_x:u_ξ*ξ_x+u_η*η_x$
+u_y:u_ξ*ξ_y+u_η*η_y$
+u_xx:u_ξξ*(ξ_x)^2+2*u_ξη*ξ_x*η_x+u_ηη*(η_x)^2+u_ξ*ξ_xx+u_η*η_xx$
+u_yy:u_ξξ*(ξ_y)^2+2*u_ξη*ξ_y*η_y+u_ηη*(η_y)^2+u_ξ*ξ_yy+u_η*η_yy$
+u_xy:u_ξξ*ξ_x*ξ_y+u_ξη*(ξ_x*η_y+ξ_y*η_x)+u_ηη*η_x*η_y+u_ξ*ξ_xy+u_η*η_xy$
+eq3:A*u_xx+B*u_xy+C*u_yy=0;
+ratsimp(%);
+solve(%,u_ηη);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Elliptic
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Q1. 4*u_xx+u_yy=0
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+4*u_xx+u_yy=0;
+'A = A:4;
+'B = B:0;
+'C = C:1;
+'D = D:B^2-4*A*C;
+assume(y>0);
+assume(x>0);
+eq1: 'diff(y,x) = (B+sqrt(D))/(2*A);
+eq2: 'diff(y,x) = (B-sqrt(D))/(2*A);
+sol1: solve(ode2(eq1,y,x),%c);
+sol2: solve(ode2(eq2,y,x),%c);
+α:rhs(first(sol1));
+β:rhs(first(sol2));
+ξ:(1/2)*(α+β);
+η:(1/(2*%i))*(α-β);
+ξ_x:diff(ξ,x)$ξ_y:diff(ξ,y)$ξ_xx:diff(ξ,x,2)$ξ_yy:diff(ξ,y,2)$ξ_xy:diff(ξx,y)$
+η_x:diff(η,x)$η_y:diff(η,y)$η_xx:diff(η,x,2)$η_yy:diff(η,y,2)$η_xy:diff(ηx,y)$
+u_x:u_ξ*ξ_x+u_η*η_x$
+u_y:u_ξ*ξ_y+u_η*η_y$
+u_xx:u_ξξ*(ξ_x)^2+2*u_ξη*ξ_x*η_x+u_ηη*(η_x)^2+u_ξ*ξ_xx+u_η*η_xx$
+u_yy:u_ξξ*(ξ_y)^2+2*u_ξη*ξ_y*η_y+u_ηη*(η_y)^2+u_ξ*ξ_yy+u_η*η_yy$
+u_xy:u_ξξ*ξ_x*ξ_y+u_ξη*(ξ_x*η_y+ξ_y*η_x)+u_ηη*η_x*η_y+u_ξ*ξ_xy+u_η*η_xy$
+eq3:A*u_xx+C*u_yy=0;
+ratsimp(%);
+solve(%,u_ηη);
+ 
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$
